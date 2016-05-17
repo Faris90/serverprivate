@@ -431,7 +431,7 @@ module.exports = class BotPlayer extends PlayerTracker {
              this.teamtimout = 30;
              this.team = 0;
              this.teameject = 0;
-             console.log("team timeout");
+             // console.log("team timeout");
            } else {
            this.teamtimout --;
            }
@@ -464,7 +464,7 @@ module.exports = class BotPlayer extends PlayerTracker {
          }
          if (des < 700 + this.teamingwith.cells[i].mass) {
            var ok = true;
-           console.log("ok true")
+           // console.log("ok true")
          break;
          }
         }
@@ -472,7 +472,7 @@ module.exports = class BotPlayer extends PlayerTracker {
           if (this.teameject < 5 && cell.mass > 100) {
             this.mouse = this.teamingwith.centerPos;
             this.gameServer.ejectMass(this);
-            console.log("ejecting");
+           // console.log("ejecting");
            this.teameject ++
           }
          
@@ -613,7 +613,7 @@ module.exports = class BotPlayer extends PlayerTracker {
     var dist = this.getDist(cell, check);
 
     var inRange = Math.atan((2 * cell.getSize()) / dist); // Opposite/adjacent
-    console.log(inRange);
+    // console.log(inRange);
     if ((v1 <= (v2 + inRange)) && (v1 >= (v2 - inRange))) {
       // Path collides
       return true;
