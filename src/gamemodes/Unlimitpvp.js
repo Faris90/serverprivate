@@ -33,8 +33,14 @@ Unlimitpvp.prototype = new Mode();
 Unlimitpvp.prototype.startGamePrep = function (gameServer) {
   this.gamePhase = 1;
   this.timer = this.prepTime;
-  gameServer.config.playerRecombineTime = 0;
-  gameServer.config.playerMaxCells = 100000;
+  gameServer.config.playerMaxCells = 50;
+    gameServer.config.playerRecombineTime = 0;
+    gameServer.config.playerFastDecay = 0;
+    gameServer.config.fastdecayrequire = 9000;
+    gameServer.config.FDmultiplyer = 2;
+    gameServer.config.playerSpeed = 40;
+    gameServer.config.splitSpeed = 82;
+    gameServer.config.playerMinMassSplit = 10;
 };
 
 Unlimitpvp.prototype.startGame = function (gameServer) {
