@@ -41,6 +41,10 @@ Unlimitpvp.prototype.startGamePrep = function (gameServer) {
     gameServer.config.playerSpeed = 40;
     gameServer.config.splitSpeed = 82;
     gameServer.config.playerMinMassSplit = 10;
+    gameServer.configborderLeft = 0;
+    gameServer.configborderRight = 7000;
+    gameServer.configborderTop = 0;
+    gameServer.configborderBottom = 7000;
 };
 
 Unlimitpvp.prototype.startGame = function (gameServer) {
