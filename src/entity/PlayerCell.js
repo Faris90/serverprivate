@@ -55,7 +55,7 @@ PlayerCell.prototype.calcMergeTime = function (base) {
   if (base == 0 || this.owner.recombineinstant) {
     r = true; // If base recombine time is 0, instantly recombine
   } else {
-    var rec = Math.floor(base + ((0.02 * this.mass))); // base seconds + 0.02% of mass
+    if(base == 0) var rec = Math.floor(base); else var rec = Math.floor(base + ((0.02 * this.mass))); // base seconds + 0.02% of mass
     if (this.recombineTicks > rec) r = true; // Can combine with other cells
   }
   this.shouldRecombine = r;
