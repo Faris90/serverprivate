@@ -207,11 +207,11 @@ getUnique() {
           var data = '';
           if (!error && response.statusCode == 200) {
             fs.writeFileSync('./uniban.txt', body);
-            console.log("Uniban loaded");
+            console.log("[Console] [\x1b[32mOK\x1b[0m] Uniban updated");
             var data = body
           } else {
            var data = fs.readFileSync('./uniban.txt', body);
-           console.log("Couldnt connect to server, uniban is loaded from local files.")
+           console.log("[Console] [\x1b[34mINFO\x1b[0m] Couldnt connect to server, uniban is loaded from local files.")
           }
           try {
             this.uniban = data.split(/[\r\n]+/).filter(function (x) {
@@ -247,7 +247,7 @@ this.uniqueid = random(7)
     
   }
   
-  console.log(this.uniqueid)
+  console.log("[Console] [\x1b[34mINFO\x1b[0m] Your unique id is: " + this.uniqueid)
 }
 
   loadConfig() {
@@ -257,14 +257,14 @@ this.uniqueid = random(7)
       var test = fs.readFileSync('./files.json', 'utf-8');
 
     } catch (err) {
-      console.log("[Game] files.json not found... Generating new files.json");
+      console.log("[Game] [\x1b[34mINFO\x1b[0m] files.json not found... Generating new files.json");
       // todo we need a real generator function for this, it shouldn't be an empty file
       fs.writeFileSync('./files.json', '');
     }
     console.log('Loading Config Files...');
     let configFiles = glob.sync("./settings/*.ini");
     if (configFiles === []) {
-      console.log("[Game] No config files found, generating: src/settings/config.ini");
+      console.log("[Game] [\x1b[34mINFO\x1b[0m] No config files found, generating: src/settings/config.ini");
 
       // Create a new config
       fs.writeFileSync('./settings/config.ini', ini.stringify(this.config));
@@ -280,7 +280,7 @@ this.uniqueid = random(7)
           this.config[obj] = load[obj];
         }
       } catch (err) {
-        console.warn("[Game] Error while loading: " + file + " error: " + err);
+        console.warn("[Game] [\x1b[31mFAIL\x1b[0m] Error while loading: " + file + " error: " + err);
       }
     });
 
@@ -290,7 +290,7 @@ this.uniqueid = random(7)
         this.config[o] = override[o];
       }
     } catch (err) {
-      console.log("[Game] Override not found... Generating new override");
+      console.log("[Game] [\x1b[34mINFO\x1b[0m] Override not found... Generating new override");
       fs.writeFileSync('./settings/override.ini', "// Copy and paste configs from gameserver.ini that you dont want to be overwritten");
 
     }
@@ -303,7 +303,7 @@ this.uniqueid = random(7)
       });
 
     } catch (err) {
-      console.log("[Game] Banned.txt not found... Generating new banned.txt");
+      console.log("[Game] [\x1b[34mINFO\x1b[0m] Banned.txt not found... Generating new banned.txt");
       fs.writeFileSync('./banned.txt', '');
     }
   }
@@ -314,7 +314,7 @@ this.uniqueid = random(7)
         return x != ''; // filter empty names
       });
     } catch (err) {
-      console.log("[Game] opbyip.txt not found... Generating new opbyip.txt");
+      console.log("[Game] [\x1b[34mINFO\x1b[0m] opbyip.txt not found... Generating new opbyip.txt");
       fs.writeFileSync('./opbyip.txt', '');
     }
   }
@@ -325,7 +325,7 @@ this.uniqueid = random(7)
       this.highScores = "\n------------------------------\n\n" + fs.readFileSync('./highscores.txt', 'utf-8');
       fs.writeFileSync('./highscores.txt', this.highscores);
     } catch (err) {
-      console.log("[Game] highscores.txt not found... Generating new highscores.txt");
+      console.log("[Game] [\x1b[34mINFO\x1b[0m] highscores.txt not found... Generating new highscores.txt");
       fs.writeFileSync('./highscores.txt', '');
     }
   }
@@ -366,7 +366,7 @@ loadRandomSkin() {
             fs.writeFileSync('customskins.txt', body);
 
           } else {
-            console.log("[Update] Could not fetch data from servers... will generate empty file");
+            console.log("[Update] [\x1b[31mFAIL\x1b[0m] Could not fetch data from servers... will generate empty file");
             fs.writeFileSync('customskins.txt', "");
           }
         });
@@ -383,7 +383,7 @@ loadRandomSkin() {
         }
       }
     } catch (e) {
-      console.warn("[Console] Failed to load/download customskins.txt")
+      console.warn("[Console] [\x1b[31mFAIL\x1b[0m] Failed to load/download customskins.txt")
     }
 
   }
