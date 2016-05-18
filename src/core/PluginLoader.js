@@ -37,7 +37,7 @@ this.version = version;
       console.log("[Console] Loading plugins in dev mode");
       var files = fs.readdirSync('./plugins/');
       for (var i in files) {
-
+if(!fs.lstatSync('../plugins/' + files[i]).isDirectory()) continue;
         var plugin = require('../plugins/' + files[i] + '/index.js');
         if (plugin.compatVersion) {
               var com = parseInt(plugin.compatVersion.replace(/\./g,''));
@@ -97,6 +97,7 @@ this.version = version;
         for (var i in files) {
 
           try {
+            if(!fs.lstatSync('../plugins/' + files[i]).isDirectory()) continue;
             var plugin = require('../plugins/' + files[i] + '/index.js');
             if (plugin.compatVersion) {
               var com = parseInt(plugin.compatVersion.replace(/\./g,''));
