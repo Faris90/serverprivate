@@ -305,7 +305,7 @@ if (this.gameServer.config.highscore == 1) {
     }
     if (this.socket.packetHandler.pressE) { // E Press
     this.op.pressE(this.gameServer,this)
-      this.socket.packetHandler.pressQ = false;
+      this.socket.packetHandler.pressE = false;
     }
     if (this.socket.packetHandler.pressR) { // R Press
     this.op.pressR(this.gameServer,this)
