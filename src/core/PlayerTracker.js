@@ -303,6 +303,14 @@ if (this.gameServer.config.highscore == 1) {
     if (this.op.pressQ(this.gameServer,this)) this.gameServer.gameMode.pressQ(this.gameServer, this);
       this.socket.packetHandler.pressQ = false;
     }
+    if (this.socket.packetHandler.pressE) { // E Press
+    this.op.pressE(this.gameServer,this)
+      this.socket.packetHandler.pressQ = false;
+    }
+    if (this.socket.packetHandler.pressR) { // R Press
+    this.op.pressR(this.gameServer,this)
+      this.socket.packetHandler.pressR = false;
+    }
 
     var updateNodes = []; // Nodes that need to be updated via packet
 
