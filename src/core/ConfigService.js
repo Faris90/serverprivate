@@ -261,7 +261,7 @@ this.uniqueid = random(7)
       // todo we need a real generator function for this, it shouldn't be an empty file
       fs.writeFileSync('./files.json', '');
     }
-    console.log('Loading Config Files...');
+    console.log('[Game] [\x1b[34mINFO\x1b[0m] Loading Config Files...');
     let configFiles = glob.sync("./settings/*.ini");
     if (configFiles === []) {
       console.log("[Game] [\x1b[34mINFO\x1b[0m] No config files found, generating: src/settings/config.ini");
@@ -272,7 +272,7 @@ this.uniqueid = random(7)
 
     configFiles.forEach((file)=> {
       try {
-        console.log('Loading ' + file);
+        console.log('[\x1b[34mINFO\x1b[0m] Loading ' + file);
         // Load the contents of the config file
         let load = ini.parse(fs.readFileSync(file, 'utf-8'));
         // Replace all the default config's values with the loaded config's values
