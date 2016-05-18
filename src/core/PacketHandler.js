@@ -9,6 +9,8 @@ function PacketHandler(gameServer, socket) {
   this.pressQ = false;
   this.pressW = false;
   this.pressSpace = false;
+  this.pressE = false;
+  this.pressR = false;
 }
 
 module.exports = PacketHandler;
@@ -102,6 +104,12 @@ PacketHandler.prototype.handleMessage = function (message) {
       // W Press - Eject mass
       this.pressW = true;
       break;
+    case 22:
+    this.pressE = true;
+    break;
+    case 23:
+      this.pressR = true;
+    break;
     case 255:
       // Connection Start
       if (view.byteLength == 5) {
