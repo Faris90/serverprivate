@@ -9,16 +9,48 @@ function Op() {
 module.exports = Op;
 
 // Override these
-
-
+Op.prototype.pressE = function (gameServer, player) {
+  for (var i in gameServer.plugins) {
+        if (gameServer.plugins[i].beforee && gameServer.plugins[i].name && gameServer.plugins[i].author && gameServer.plugins[i].version) {
+          if (!gameServer.plugins[i].beforee(player)) return;
+        }
+      }
+      if (gameServer.config.useER == 1) {
+        for (var i in gameServer.clients) {
+      var client = gameServer.clients[i].playerTracker;
+      if ((typeof gameServer.clients[i].remoteAddress == 'undefined') && client.cells && client.owner == player) {
+        gameServer.splitCells(client);
+      }
+    }
+        
+      }
+      
+};
+Op.prototype.pressR = function (gameServer, player) {
+  for (var i in gameServer.plugins) {
+        if (gameServer.plugins[i].beforer && gameServer.plugins[i].name && gameServer.plugins[i].author && gameServer.plugins[i].version) {
+          if (!gameServer.plugins[i].beforer(player)) return;
+        }
+      }
+       if (gameServer.config.useER == 1) {
+        for (var i in gameServer.clients) {
+      var client = gameServer.clients[i].playerTracker;
+      if ((typeof gameServer.clients[i].remoteAddress == 'undefined') && client.cells && client.owner == player) {
+       gameServer.ejectMass(client);
+      }
+    }
+        
+      }
+      
+};
 Op.prototype.pressQ = function (gameServer, player) {
 for (var i in gameServer.plugins) {
         if (gameServer.plugins[i].beforeq && gameServer.plugins[i].name && gameServer.plugins[i].author && gameServer.plugins[i].version) {
           if (!gameServer.plugins[i].beforeq(player)) return;
         }
       }
-
-  if (player.minioncontrol) {
+ 
+  if (player.minioncontrol && gameServer.config.useER != 1) {
     if (player.mi == 1) {
       player.mi = 0;
       player.name = player.oldname;
@@ -75,7 +107,7 @@ Op.prototype.pressW = function (gameServer, player) {
         }
       }
   // Called when the W key is pressed
-  if (player.mi == 1 && player.minioncontrol) {
+  if (player.mi == 1 && player.minioncontrol && gameServer.config.useER != 1) {
 
     for (var i in gameServer.clients) {
       var client = gameServer.clients[i].playerTracker;
@@ -269,7 +301,7 @@ Op.prototype.pressSpace = function (gameServer, player) {
         }
       }
   // Called when the Space bar is pressed
-  if (player.mi == 1 && player.minioncontrol) {
+  if (player.mi == 1 && player.minioncontrol && gameServer.config.useER != 1) {
     for (var i in gameServer.clients) {
       var client = gameServer.clients[i].playerTracker;
       if ((typeof gameServer.clients[i].remoteAddress == 'undefined') && client.cells && client.owner == player) {
