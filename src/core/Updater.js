@@ -61,13 +61,14 @@ module.exports = class Updater {
     var percent = Math.round(this.dow/this.tobe*10)
     var bar = ""
     for(var i = 0; i < percent; i++) {
-      bar = bar + "==";
+      bar = bar + "===";
     }
+    if (percent == 10) bar = bar + "="; else bar = bar + ">";
     bar = bar + ">";
-    var extras = 21 - bar.length;
+    var extras = 31 - bar.length;
     var extra = "";
     for (var i = 0; i < extras; i++) extra = extra + " ";
-    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% " + file + "         \r");
+    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "%\r");
     
     
   }
