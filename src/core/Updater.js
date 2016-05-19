@@ -56,7 +56,7 @@ module.exports = class Updater {
       console.error(err);
     }
   }
-  loading(file) {
+  loading(action) {
     this.dow ++;
     var percent = Math.round(this.dow/this.tobe*10)
     var bar = ""
@@ -67,7 +67,7 @@ module.exports = class Updater {
     var extras = 31 - bar.length;
     var extra = "";
     for (var i = 0; i < extras; i++) extra = extra + " ";
-    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "%\r");
+    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% " + action + "\r");
     
     
   }
@@ -76,7 +76,7 @@ downloadWithLoad(file, callback) {
     let url = this.url + file.src;
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200 && body != "") {
-        this.loading(file.dst);
+        this.loading("Downloading");
         fs.writeFile(file.dst, body, (err, res)=> {
           if (typeof callback === "function") {
             callback(err, res);
@@ -111,7 +111,7 @@ setURL(optin) {
     this.dow = 0;
     this.newFiles = JSON.parse(fs.readFileSync('filesTemp.json'));
     console.log("[Console] Downloading update...");
-    this.tobe = 0;
+    this.tobe = 2;
     async.each(this.newFiles, (file, cb)=> {
       this.tobe ++;
       this.downloadWithLoad(file, cb);
@@ -128,7 +128,7 @@ setURL(optin) {
 
   runNpmInstall() {
     // executes `pwd`
-    console.log('\n[Update] Running npm install to install new node modules!');
+    this.loading("Running npm install");
     let child = exec("npm install", function (error, stdout, stderr) {
       if (error !== null) {
         console.error('[Execution Error] Failed to run npm install  Reason: ', error);
@@ -149,7 +149,7 @@ function handleError(gameServer) {
       process.exit(3);
     } else {
       gameServer.updater.runNpmInstall();
-      console.log("[Update] Done! Now shuting down in 3 seconds for restart...");
+      gameServer.updater.loading("Done!                  ");
       setTimeout(function () {
         gameServer.socketServer.close();
         process.exit(3);
