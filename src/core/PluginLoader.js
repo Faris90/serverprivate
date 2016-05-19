@@ -34,7 +34,7 @@ this.version = version;
     fs.mkdir('./plugins');
   }
     if (this.gameServer.config.dev == 1) {
-      console.log("[Console] [\x1b[34mINFO\x1b[0m] Loading plugins in dev mode");
+      console.log("[\x1b[34mINFO\x1b[0m] Loading plugins in dev mode");
       var files = fs.readdirSync('./plugins/');
       for (var i in files) {
 try {
@@ -46,7 +46,7 @@ try {
               var com = parseInt(plugin.compatVersion.replace(/\./g,''));
               var cur = parseInt(this.version.replace(/\./g,''));
               if (cur < com) {
-                console.log("[Console] [\x1b[34mINFO\x1b[0m] pluginfile " + files[i] + " was not loaded as it is not compatible with v" + this.version + " Required: " + plugin.compatVersion)
+                console.log("[\x1b[34mINFO\x1b[0m] pluginfile " + files[i] + " was not loaded as it is not compatible with v" + this.version + " Required: " + plugin.compatVersion)
                 continue;
               }
             }
@@ -78,16 +78,16 @@ try {
     }
   } catch (err) {
     // No config
-    console.log("[Plugin] [\x1b[31mFAIL\x1b[0m]vPlugin configs for " + plugin.name + " Cannot be loaded");
+    console.log("[\x1b[31mFAIL\x1b[0m]vPlugin configs for " + plugin.name + " Cannot be loaded");
   }
               }
               plugin.init(this.gameServer, config);
           }
 
-          console.log("[Console] [\x1b[32mOK\x1b[0m] loaded plugin: " + plugin.name + " By " + plugin.author + " version " + plugin.version);
+          console.log("[\x1b[32mOK\x1b[0m] loaded plugin: " + plugin.name + " By " + plugin.author + " version " + plugin.version);
 
         } else {
-          console.log("[Console] [\x1b[31mFAIL\x1b[0m]Didnt load pluginfile " + files[i] + " because it was missing parameters");
+          console.log("[\x1b[31mFAIL\x1b[0m]Didnt load pluginfile " + files[i] + " because it was missing parameters");
         }
       }
 
@@ -95,7 +95,7 @@ try {
 
 
       try {
-        console.log("[Console] [\x1b[34mINFO\x1b[0m] Loading plugins");
+        console.log("[\x1b[34mINFO\x1b[0m] Loading plugins");
         var files = fs.readdirSync('./plugins/');
         for (var i in files) {
 
@@ -109,7 +109,7 @@ try {
               var com = parseInt(plugin.compatVersion.replace(/\./g,''));
               var cur = parseInt(this.version.replace(/\./g,''));
               if (cur < com) {
-                console.log("[Console] [\x1b[31mFAIL\x1b[0m] pluginfile " + files[i] + " was not loaded as it is not compatible with v" + this.version + " Required: " + plugin.compatVersion)
+                console.log("[\x1b[31mFAIL\x1b[0m] pluginfile " + files[i] + " was not loaded as it is not compatible with v" + this.version + " Required: " + plugin.compatVersion)
                 continue;
               }
             }
@@ -143,23 +143,23 @@ try {
     }
   } catch (err) {
     // No config
-    console.log("[Plugin] [\x1b[31mFAIL\x1b[0m] Plugin configs for " + plugin.name + " Cannot be loaded");
+    console.log("[\x1b[31mFAIL\x1b[0m] Plugin configs for " + plugin.name + " Cannot be loaded");
   }
               }
               plugin.init(this.gameServer, config);
           }
 
-              console.log("[Console] [\x1b[32mOK\x1b[0m] loaded plugin: " + plugin.name + " By " + plugin.author + " version " + plugin.version);
+              console.log("[\x1b[32mOK\x1b[0m] loaded plugin: " + plugin.name + " By " + plugin.author + " version " + plugin.version);
             } else {
-              console.log("[Console] [\x1b[31mFAIL\x1b[0m] Didnt load pluginfile " + files[i] + " because it was missing parameters");
+              console.log("[\x1b[31mFAIL\x1b[0m] Didnt load pluginfile " + files[i] + " because it was missing parameters");
             }
           } catch (e) {
-            console.log("[Console] [\x1b[31mFAIL\x1b[0m] Failed to load pluginfile " + files[i] + " Reason: " + e);
+            console.log("[\x1b[31mFAIL\x1b[0m] Failed to load pluginfile " + files[i] + " Reason: " + e);
 
           }
         }
       } catch (e) {
-        console.log("[Console] [\x1b[31mFAIL\x1b[0m] Couldnt load plugins");
+        console.log("[\x1b[31mFAIL\x1b[0m] Couldnt load plugins");
       }
     }
 
