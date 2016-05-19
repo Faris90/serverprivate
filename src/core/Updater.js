@@ -57,7 +57,7 @@ module.exports = class Updater {
 
   downloadFile(file, callback) {
     let url = this.url + file.src;
-    console.log('[Downloading] [\x1b[34mINFO\x1b[0m] ' + url + ' to: ' + file.dst);
+    console.log('[Downloading] [\x1b[34mINFO\x1b[0m] ' + url + ' to: ' + file.dst + " \r ");
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200 && body != "") {
         console.log("[Done] [\x1b[32mOK\x1b[0m] " + file.dst + " \r ")
