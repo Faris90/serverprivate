@@ -60,7 +60,7 @@ module.exports = class Updater {
     console.log('[Downloading] [\x1b[34mINFO\x1b[0m] ' + url + ' to: ' + file.dst);
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200 && body != "") {
-        console.log("\r[Done] [\x1b[32mOK\x1b[0m] " + file.dst)
+        console.log("[Done] [\x1b[32mOK\x1b[0m] " + file.dst + " \r ")
         fs.writeFile(file.dst, body, (err, res)=> {
           if (typeof callback === "function") {
             callback(err, res);
