@@ -56,7 +56,7 @@ module.exports = class Updater {
       console.error(err);
     }
   }
-  loading() {
+  loading(file) {
     this.dow ++;
     var percent = Math.round(this.dow/this.tobe*10)
     var bar = ""
@@ -67,7 +67,7 @@ module.exports = class Updater {
     var extras = 21 - bar.length;
     var extra = "";
     for (var i = 0; i < extras; i++) extra = extra + " ";
-    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% \r");
+    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% " + file + "\r");
     
     
   }
@@ -76,7 +76,7 @@ downloadWithLoad(file, callback) {
     let url = this.url + file.src;
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200 && body != "") {
-        this.loading();
+        this.loading(file.dst);
         fs.writeFile(file.dst, body, (err, res)=> {
           if (typeof callback === "function") {
             callback(err, res);
