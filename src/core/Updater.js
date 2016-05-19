@@ -67,7 +67,7 @@ module.exports = class Updater {
     var extras = 21 - bar.length;
     var extra = "";
     for (var i = 0; i < extras; i++) extra = extra + " ";
-    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% " + file + "\r");
+    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% " + file + "         \r");
     
     
   }
