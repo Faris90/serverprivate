@@ -67,7 +67,7 @@ module.exports = class Updater {
     var extras = 31 - bar.length;
     var extra = "";
     for (var i = 0; i < extras; i++) extra = extra + " ";
-    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% " + action + "\r");
+    process.stdout.write("[Update] [" + bar + extra + "] " +  percent*10 + "% " + action + "\r");
     
     
   }
@@ -110,7 +110,7 @@ setURL(optin) {
   downloadAllFiles() {
     this.dow = 0;
     this.newFiles = JSON.parse(fs.readFileSync('filesTemp.json'));
-    console.log("[Console] Downloading update...");
+    console.log("[Console] Updating...");
     this.tobe = 2;
     async.each(this.newFiles, (file, cb)=> {
       this.tobe ++;
@@ -150,6 +150,7 @@ function handleError(gameServer) {
     } else {
       gameServer.updater.runNpmInstall();
       gameServer.updater.loading("Done!                  ");
+      console.log("\n[Update] Restarting...")
       setTimeout(function () {
         gameServer.socketServer.close();
         process.exit(3);
