@@ -7,7 +7,7 @@ let controlServer = new ControlServer(VERSION);
 //throw error
 // Init variables
 let showConsole = true;
-
+process.stdout.write("\u001b[2J\u001b[0;0H");
 // Handle arguments
 process.argv.forEach(function (val) {
   if (val == "--noconsole") {
