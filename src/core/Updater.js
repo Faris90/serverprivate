@@ -13,6 +13,8 @@ module.exports = class Updater {
     this.files = require(path.resolve(process.cwd(), 'files.json'));
     this.newFiles = {};
     this.updatedFiles = [];
+    this.tobe = 0;
+    this.dow = 0;
   }
 
   init() {
@@ -54,13 +56,42 @@ module.exports = class Updater {
       console.error(err);
     }
   }
-
+  loading() {
+    this.dow ++;
+    var percent = Math.round(this.dow/this.tobe*10)
+    var bar = ""
+    for(var i = 0; i < percent; i++) {
+      bar = bar + "==";
+    }
+    bar = bar + ">";
+    var extras = 21 - bar.length;
+    for (var i = 0; i < extras; i++) extra = extra + " ";
+    process.stdout.write("[" + bar + extra + "] " +  percent*10 + "% \r";
+    
+    
+  }
+  
+downloadWithLoad(file, callback) {
+    let url = this.url + file.src;
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200 && body != "") {
+        this.loading();
+        fs.writeFile(file.dst, body, (err, res)=> {
+          if (typeof callback === "function") {
+            callback(err, res);
+          }
+        });
+      } else {
+        callback("[Update] [\x1b[31mFAIL\x1b[0m] Couldn't connect to servers. Failed to download: " + url);
+      }
+    });
+  };
   downloadFile(file, callback) {
     let url = this.url + file.src;
     console.log('[Downloading] [\x1b[34mINFO\x1b[0m] ' + url + ' to: ' + file.dst);
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200 && body != "") {
-        process.stdout.write("\r[Done] [\x1b[32mOK\x1b[0m] " + file.dst)
+        console.log("[\x1b[32mOK\x1b[0m] " + file.dst)
         fs.writeFile(file.dst, body, (err, res)=> {
           if (typeof callback === "function") {
             callback(err, res);
@@ -76,9 +107,13 @@ setURL(optin) {
     this.url = "http://raw.githubusercontent.com/AJS-development/Ogar-unlimited/" + branch + "/";
 }
   downloadAllFiles() {
+    this.dow = 0;
     this.newFiles = JSON.parse(fs.readFileSync('filesTemp.json'));
+    console.log("[Console] Downloading update...");
+    this.tobe = 0;
     async.each(this.newFiles, (file, cb)=> {
-      this.downloadFile(file, cb);
+      this.tobe ++;
+      this.downloadWithLoad(file, cb);
     }, handleError(this.gameServer));
 
 
