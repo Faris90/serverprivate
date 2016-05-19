@@ -64,7 +64,6 @@ module.exports = class Updater {
       bar = bar + "===";
     }
     if (percent == 10) bar = bar + "="; else bar = bar + ">";
-    bar = bar + ">";
     var extras = 31 - bar.length;
     var extra = "";
     for (var i = 0; i < extras; i++) extra = extra + " ";
