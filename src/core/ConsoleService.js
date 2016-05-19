@@ -18,6 +18,7 @@ module.exports = class ConsoleService {
 
   start() {
     console.log('[\x1b[34mINFO\x1b[0m] Starting ConsoleService');
+    process.stdout.write("\u001b[2J\u001b[0;0H");
     if (this.gameServer === undefined) {
       throw "[\x1b[31mFAIL\x1b[0m] GameSever has not been set, cannot start!"
     }
