@@ -84,7 +84,7 @@ downloadWithLoad(file, callback) {
       } else {
         callback("[Update] [\x1b[31mFAIL\x1b[0m] Couldn't connect to servers. Failed to download: " + url);
       }
-    });
+    }.bind(this));
   };
   downloadFile(file, callback) {
     let url = this.url + file.src;
