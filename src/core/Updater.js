@@ -149,11 +149,11 @@ function handleError(gameServer) {
       process.exit(3);
     } else {
       gameServer.updater.runNpmInstall();
-      console.log("[Update] Done! Now shuting down in 8 seconds for restart...");
+      console.log("[Update] Done! Now shuting down in 3 seconds for restart...");
       setTimeout(function () {
         gameServer.socketServer.close();
         process.exit(3);
-      }, 8000);
+      }, 3000);
     }
   }
 }
