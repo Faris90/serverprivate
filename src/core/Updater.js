@@ -92,7 +92,7 @@ setURL(optin) {
 
   runNpmInstall() {
     // executes `pwd`
-    console.log('[Update] Running npm install to install new node modules!');
+    console.log('\n[Update] Running npm install to install new node modules!');
     let child = exec("npm install", function (error, stdout, stderr) {
       if (error !== null) {
         console.error('[Execution Error] Failed to run npm install  Reason: ', error);
