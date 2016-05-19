@@ -360,7 +360,7 @@ loadRandomSkin() {
   loadCustomSkin() {
     try {
       if (!fs.existsSync('customskins.txt')) {
-        console.log("[Console] Generating customskin.txt...");
+        console.log("[\x1b[34mINFO\x1b[0m] Generating customskin.txt...");
         request('https://raw.githubusercontent.com/AJS-development/Ogar-unlimited/master/src/customskins.txt', function (error, response, body) {
           if (!error && response.statusCode == 200) {
 
