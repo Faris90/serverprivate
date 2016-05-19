@@ -17,9 +17,9 @@ module.exports = class ConsoleService {
   }
 
   start() {
-    console.log('Starting ConsoleService');
+    console.log('[\x1b[34mINFO\x1b[0m] Starting ConsoleService');
     if (this.gameServer === undefined) {
-      throw "[ConsoleService] [\x1b[31mFAIL\x1b[0m] GameSever has not been set, cannot start!"
+      throw "[\x1b[31mFAIL\x1b[0m] GameSever has not been set, cannot start!"
     }
     if (!this.hasTitleBeenWriten) {
       this.writeTitle();
@@ -173,11 +173,11 @@ module.exports = class ConsoleService {
         execute(this.gameServer, split);
 
       } else {
-        console.warn('[ConsoleService] [\x1b[31mFAIL\x1b[0m] Failed to run command: ' + command + " args: " + split);
+        console.warn('[\x1b[31mFAIL\x1b[0m] Failed to run command: ' + command + " args: " + split);
       }
     }
     } catch (e) {
-      console.warn('[ConsoleService] [\x1b[31mFAIL\x1b[0m] Failed to run command: ' + command + " args: " + split);
+      console.warn('[\x1b[31mFAIL\x1b[0m] Failed to run command: ' + command + " args: " + split);
     }
 
   };
@@ -239,8 +239,8 @@ execommand(command, args) {
           try {
             self.parseCommands(str);
           } catch (err) {
-            console.log("[ERROR] [\x1b[31mFAIL\x1b[0m] Oh my, there seems to be an error with the command " + str);
-            console.log("[ERROR] [\x1b[31mFAIL\x1b[0m] Please alert AJS dev with this message:\n" + err);
+            console.log("[\x1b[31mERROR\x1b[0m] Oh my, there seems to be an error with the command " + str);
+            console.log("[\x1b[31mERROR\x1b[0m] Please alert AJS dev with this message:\n" + err);
           }
         } else {
           self.parseCommands(str); // dev mode, throw full error
